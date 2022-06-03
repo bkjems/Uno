@@ -145,7 +145,7 @@ namespace UnoGame2
                 }
                 else
                 {
-                    index++;
+                    index += 1;
                 }
             }
             else
