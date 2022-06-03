@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnoGameTest", "UnoGameTest\UnoGameTest.csproj", "{F95FF170-65D6-4ED6-A41A-918669979A53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnoGame2", "UnoGame2\UnoGame2.csproj", "{0B995380-046C-48C4-A629-8719BE875C9E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F95FF170-65D6-4ED6-A41A-918669979A53}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{F95FF170-65D6-4ED6-A41A-918669979A53}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{F95FF170-65D6-4ED6-A41A-918669979A53}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{F95FF170-65D6-4ED6-A41A-918669979A53}.Release|anycpu.Build.0 = Release|Any CPU
+		{0B995380-046C-48C4-A629-8719BE875C9E}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{0B995380-046C-48C4-A629-8719BE875C9E}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{0B995380-046C-48C4-A629-8719BE875C9E}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{0B995380-046C-48C4-A629-8719BE875C9E}.Release|anycpu.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5AEC39AA-5CB3-46B3-A26B-81F58ADE4E13}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.FileWidth = 80
+		$1.TabsToSpaces = True
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.scope = text/x-csharp
+	EndGlobalSection
+EndGlobal
