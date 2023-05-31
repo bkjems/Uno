@@ -167,11 +167,9 @@ namespace UnoGame2
 
         private Card GetStartCard(Card card)
         {
-            /* If the top card is a Wild or Wild Draw 4, return it to the deck and pick another card. */
-            if (card == null)
-            {
-                card = GetCard();
-            }
+            /* If the top card is a Wild or Wild Draw 4, return it to the 
+             * deck and pick another card. */
+            card ??= GetCard();
 
             while (card.Action == Card.ActionType.WILD
                 || card.Action == Card.ActionType.WILD_DRAW_4)

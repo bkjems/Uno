@@ -19,8 +19,14 @@ namespace UnoGame
 	public class Deck
 	{
 		private List<Card> deckOfCards = new List<Card>();
+        public List<Card> Cards { get => deckOfCards; set => deckOfCards = value; }
 
-		public Deck()
+        public Deck(List<Card> cards)
+        {
+            Cards = cards;
+        }
+
+        public Deck()
 		{
 			// Create cards, one 0 card
 			foreach (Card.Color color in (Card.Color[])Enum.GetValues(typeof(Card.Color)))
@@ -73,12 +79,12 @@ namespace UnoGame
 			Cards.Add(new Card(14, Card.Color.NONE, Card.ActionType.WILD_DRAW_4));
 			Cards.Add(new Card(14, Card.Color.NONE, Card.ActionType.WILD_DRAW_4));
 
+			// randomize cards
 			var rnd = new Random();
 			Cards = deckOfCards.OrderBy(item => rnd.Next()).ToList();
 		}
 
-		public List<Card> Cards { get => deckOfCards; set => deckOfCards = value; }
-
+		// for testing only
 		public Card GetCardFromDeck()
 		{
 			try
