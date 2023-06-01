@@ -803,5 +803,30 @@ Color is YELLOW*/
 
             Assert.AreEqual(1, count);
         }
+
+        [TestMethod]
+        public void GetCardsFromDeckTakeToManyReturnNullTest()
+        {
+            foreach (Card c in g.ShuffledDeck.Cards)
+            {
+                c.Dealt = true;
+            }
+
+            g.ShuffledDeck.Cards[1].Dealt = false;
+            g.ShuffledDeck.Cards[2].Dealt = false;
+            g.ShuffledDeck.Cards[3].Dealt = false;
+            g.ShuffledDeck.Cards[4].Dealt = false;
+            // force card reset
+            List<Card> c1 = g.ShuffledDeck.GetCardsFromDeck(10);
+
+            Assert.IsNull(c1);
+        }
+
+        [TestMethod]
+        public void GetCardsFromDeckTakeZeroCardsTest()
+        {
+            List<Card> c1 = g.ShuffledDeck.GetCardsFromDeck(0);
+            Assert.AreEqual(0,c1.Count);
+        }
     }
 }

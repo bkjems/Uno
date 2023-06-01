@@ -97,8 +97,8 @@ namespace UnoGame
 				return null;
 			}
 		}
-
-		public List<Card> GetCardsFromDeck(int numberOfCards)
+		
+        public List<Card> GetCardsFromDeck(int numberOfCards)
 		{
 			if (numberOfCards <= 0)
 			{
@@ -107,15 +107,13 @@ namespace UnoGame
 
 			var cardList = new List<Card>();
 			IEnumerable<Card> cardsNotDealt = Cards.Where(c => c.Dealt == false);
-			if (cardsNotDealt != null && cardsNotDealt.Count<Card>() > 0)
-			{
-				for (int i = 0; i < numberOfCards; i++)
-				{
-					Card card = cardsNotDealt.ElementAt(i);
-					//var c = Cards.IndexOf(card);
-					cardList.Add(card);
-					card.Dealt = true;
-				}
+            if (cardsNotDealt.Any())
+            {
+                cardList = cardsNotDealt.Take(numberOfCards).ToList();
+                foreach (Card card in cardList)
+                {
+                    card.Dealt = true;
+                }
 			}
 
 			if (cardList.Count == numberOfCards)

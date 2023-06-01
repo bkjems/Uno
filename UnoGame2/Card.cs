@@ -9,6 +9,7 @@ namespace UnoGame
         {
             NONE, BLACK, RED, GREEN, YELLOW
         }
+
         public enum ActionType
         {
             NONE, DRAW_2, REVERSE, SKIP, WILD, WILD_DRAW_4
@@ -19,26 +20,25 @@ namespace UnoGame
         private bool dealt;
         private Color color;
 
-
         public Card()
         {
         }
 
         public Card(int num, Color color)
         {
-            this.Number = num;
+            Number = num;
             this.color = color;
-            this.Action = ActionType.NONE;
-            this.Dealt = false;
+            Action = ActionType.NONE;
+            Dealt = false;
             
         }
 
         public Card(int num, Color color=Color.NONE, ActionType special = ActionType.NONE)
         {
-            this.Number = num;
+            Number = num;
             this.color = color;
-            this.Action = special;
-            this.Dealt = false;
+            Action = special;
+            Dealt = false;
         }
 
         public int Number { get => number; set => number = value; }
@@ -74,12 +74,12 @@ namespace UnoGame
                    Action == Card.ActionType.WILD_DRAW_4);
         }
 
-        public string PrintCard(bool print = false, string p = "")
+        public string PrintCard(bool print = false, string player = "")
         {
             var cardText = "";
-            if (p != "")
+            if (player != "")
             {
-                cardText = string.Format("{0} ", p);
+                cardText = string.Format("{0} ", player);
 
             }
             // its a number
