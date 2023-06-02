@@ -30,20 +30,7 @@ namespace UnoGameTest
             }
         }
 
-        /*[TestMethod]
-        public void GetCardFromDeck1CardTest()
-        {
-            List<Card> cards = g.GetCards(1);
-            Assert.AreEqual(1, cards.Count);
-        }
-
-        [TestMethod]
-        public void GetCardFromDeckMultipleCardsTest()
-        {
-            List<Card> cards = g.GetCards(2);
-            Assert.AreEqual(2, cards.Count);
-        }*/
-
+        
         [TestMethod]
         public void GetNextPlayerRightRotationTest()
         {

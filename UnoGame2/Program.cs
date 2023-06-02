@@ -95,7 +95,7 @@ namespace UnoGame2
             }
         }
 
-        /*public void DealCards(int numberOfCards)
+        public void DealCards(int numberOfCards)
         {
             for (int i = 0; i < numberOfCards; i++)
             {
@@ -105,26 +105,7 @@ namespace UnoGame2
                     player.Cards.Add(card);
                 }
             }
-        }*/
-
-        public void DealCards(int numberOfCards)
-        {
-            foreach (Player player in Players)
-            {
-                player.Cards.Capacity += numberOfCards; // Preallocate the card list
-            }
-
-            for (int i = 0; i < numberOfCards; i++)
-            {
-                Card card = GetCard();
-
-                foreach (Player player in Players)
-                {
-                    player.Cards.Add(card);
-                }
-            }
         }
-
 
         public void SetRotation(Rotation rotation)
         {
@@ -135,20 +116,6 @@ namespace UnoGame2
         {
             return rotation;
         }
-
-        /*private Rotation ChangeRotation()
-        {
-            if (Rotation.LEFT == GetRotation())
-            {
-                SetRotation(Rotation.RIGHT);
-            }
-            else
-            {
-                SetRotation(Rotation.LEFT);
-            }
-            Console.WriteLine("rotation is " + GetRotation());
-            return rotation;
-        }*/
 
         private Rotation ChangeRotation()
         {
@@ -168,9 +135,8 @@ namespace UnoGame2
             return currentRotation;
         }
 
-
         /* p1, p2, p3, p4 */
-        /*public Player GetNextPlayer(Player currentPlayer)
+        public Player GetNextPlayer(Player currentPlayer)
         {
             var numberOfPlayers = Players.Count;
             var index = Players.IndexOf(currentPlayer);
@@ -203,28 +169,6 @@ namespace UnoGame2
             nextPlayer.PrintCard();
             return nextPlayer;
         }
-        */
-
-        public Player GetNextPlayer(Player currentPlayer)
-        {
-            int numberOfPlayers = Players.Count;
-            int currentIndex = Players.IndexOf(currentPlayer);
-            int nextIndex;
-
-            if (rotation == Rotation.RIGHT)
-            {
-                nextIndex = (currentIndex + 1) % numberOfPlayers;
-            }
-            else
-            {
-                nextIndex = (currentIndex - 1 + numberOfPlayers) % numberOfPlayers;
-            }
-
-            Player nextPlayer = Players[nextIndex];
-            nextPlayer.PrintCard();
-            return nextPlayer;
-        }
-
 
         private Card GetStartCard()
         {
@@ -346,41 +290,6 @@ namespace UnoGame2
             string playerList = string.Join(", ", Players.Select(player => player.Name));
             Console.WriteLine("Players: [" + playerList + "]");
         }
-
-        /*public Player PlaysCard(Player currentPlayer)
-        {
-            Card cardPlayed = currentPlayer.TryPlayCard(flippedCard);
-
-            if (cardPlayed == null)
-            {
-                // draw a card
-                cardPlayed = GetCard();
-                currentPlayer.Cards.Add(cardPlayed);
-                cardPlayed.PrintCard(true, "Picked up ");
-
-                if (cardPlayed.IsMatchOrWild(FlippedCard))
-                {
-                    cardPlayed = currentPlayer.TryPlayCard(flippedCard);
-                    if (cardPlayed.Action == Card.ActionType.WILD ||
-                        cardPlayed.Action == Card.ActionType.WILD_DRAW_4)
-                    {
-                        flippedCard.SetCardColor(currentPlayer.GetWildColor());
-                    }
-                }
-                else
-                {
-                    // draw card couldn't be played
-                    return GetNextPlayer(currentPlayer);
-                }
-            }
-
-            FlippedCard = cardPlayed;
-            currentPlayer.PrintRemoveCard(cardPlayed);
-
-            currentPlayer = HandleActionCards(FlippedCard, currentPlayer);
-            currentPlayer = GetNextPlayer(currentPlayer);
-            return currentPlayer;
-        }*/
 
         public Player PlaysCard(Player currentPlayer)
         {

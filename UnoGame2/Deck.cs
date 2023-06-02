@@ -44,7 +44,7 @@ namespace UnoGame
 					}
 					else
 					{
-						// two 1s, two 2s, two 2s, two 3s..and 9s
+						// two 1s, two 2s, two 3s..and 9s
 						Cards.Add(new Card(number, color));
 						Cards.Add(new Card(number, color));
 					}
