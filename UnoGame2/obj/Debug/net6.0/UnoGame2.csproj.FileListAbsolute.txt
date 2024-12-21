@@ -1,0 +1,15 @@
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/bin/Debug/net6.0/UnoGame2
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/bin/Debug/net6.0/UnoGame2.deps.json
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/bin/Debug/net6.0/UnoGame2.runtimeconfig.json
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/bin/Debug/net6.0/UnoGame2.dll
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/bin/Debug/net6.0/UnoGame2.pdb
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/obj/Debug/net6.0/UnoGame2.csproj.AssemblyReference.cache
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/obj/Debug/net6.0/UnoGame2.GeneratedMSBuildEditorConfig.editorconfig
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/obj/Debug/net6.0/UnoGame2.AssemblyInfoInputs.cache
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/obj/Debug/net6.0/UnoGame2.AssemblyInfo.cs
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/obj/Debug/net6.0/UnoGame2.csproj.CoreCompileInputs.cache
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/obj/Debug/net6.0/UnoGame2.dll
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/obj/Debug/net6.0/refint/UnoGame2.dll
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/obj/Debug/net6.0/UnoGame2.pdb
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/obj/Debug/net6.0/UnoGame2.genruntimeconfig.cache
+/Users/brianweston/Projects/Uno2/Uno/UnoGame2/obj/Debug/net6.0/ref/UnoGame2.dll

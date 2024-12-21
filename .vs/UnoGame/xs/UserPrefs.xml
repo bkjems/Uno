@@ -1,0 +1,28 @@
+﻿<Properties StartupConfiguration="{F95FF170-65D6-4ED6-A41A-918669979A53}|Default">
+  <MonoDevelop.Ide.ItemProperties.UnoGameTest PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.UnoGame2 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="UnoGame2/Player.cs">
+    <Files>
+      <File FileName="UnoGame2/Card.cs" Line="8" Column="21" />
+      <File FileName="UnoGame2/Deck.cs" Line="55" Column="79" />
+      <File FileName="UnoGame2/IPrint.cs" Line="1" Column="1" />
+      <File FileName="UnoGame2/Player.cs" Line="123" Column="8" />
+      <File FileName="UnoGame2/Program.cs" Line="17" Column="45" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="UnoGame">
+            <Node name="UnoGameTest" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|anycpu" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

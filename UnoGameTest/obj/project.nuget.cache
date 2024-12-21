@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "dgSpecHash": "Htd6OKbSuHiD5jsSYSRNW9Ls0+Xvq+Vrm17ku/wAIiH3gZ3ou5EqTPtCZi6VB3OZgYghLVonJomweidUn4q8wg==",
+  "success": true,
+  "projectFilePath": "/Users/brianweston/Projects/Uno2/Uno/UnoGameTest/UnoGameTest.csproj",
+  "expectedPackageFiles": [
+    "/Users/brianweston/.nuget/packages/coverlet.collector/6.0.0/coverlet.collector.6.0.0.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/microsoft.codecoverage/17.6.0/microsoft.codecoverage.17.6.0.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/microsoft.net.test.sdk/17.6.0/microsoft.net.test.sdk.17.6.0.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/microsoft.testplatform.objectmodel/17.6.0/microsoft.testplatform.objectmodel.17.6.0.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/microsoft.testplatform.testhost/17.6.0/microsoft.testplatform.testhost.17.6.0.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/mstest.testadapter/3.0.3/mstest.testadapter.3.0.3.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/mstest.testframework/3.0.3/mstest.testframework.3.0.3.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/netstandard.library/2.0.0/netstandard.library.2.0.0.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/nuget.frameworks/5.11.0/nuget.frameworks.5.11.0.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/nunit/3.13.3/nunit.3.13.3.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/system.reflection.metadata/1.6.0/system.reflection.metadata.1.6.0.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.31/microsoft.aspnetcore.app.ref.6.0.31.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/microsoft.netcore.app.ref/6.0.31/microsoft.netcore.app.ref.6.0.31.nupkg.sha512"
+  ],
+  "logs": []
+}

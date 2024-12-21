@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "4/huacoyNRsA2o8UunjZxOARyG9CYo8QK5cWThpNT7LTJyeQkLn/rcBOO9ThFGgFvmbANTrMAqSD9/JvufxOWA==",
+  "success": true,
+  "projectFilePath": "/Users/brianweston/Projects/Uno2/Uno/UnoGame2/UnoGame2.csproj",
+  "expectedPackageFiles": [
+    "/Users/brianweston/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.31/microsoft.aspnetcore.app.ref.6.0.31.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/microsoft.netcore.app.host.osx-arm64/6.0.31/microsoft.netcore.app.host.osx-arm64.6.0.31.nupkg.sha512",
+    "/Users/brianweston/.nuget/packages/microsoft.netcore.app.ref/6.0.31/microsoft.netcore.app.ref.6.0.31.nupkg.sha512"
+  ],
+  "logs": []
+}

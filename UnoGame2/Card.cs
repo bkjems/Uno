@@ -83,7 +83,7 @@ namespace UnoGame
 
             }
             // its a number
-            if (Action == Card.ActionType.NONE)
+            if (Action == ActionType.NONE)
             {
                 cardText += string.Format("{0} {1}", GetCardColor(), Number);
             }
