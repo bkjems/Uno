@@ -39,5 +39,13 @@ namespace UnoGameTest
             c.SetCardColor(Card.Color.BLACK);
             Assert.AreEqual(Card.Color.BLACK, c.GetCardColor());
         }
+
+        [TestMethod]
+        public void IsColorMatchTest()
+        {
+            Card c = new Card(3, Card.Color.GREEN);
+            Assert.AreEqual(true, c.IsColorMatch(Card.Color.GREEN));
+            Assert.AreEqual(false, c.IsColorMatch(Card.Color.RED));
+        }
     }
 }
