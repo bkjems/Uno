@@ -18,13 +18,7 @@ namespace UnoGame
 	 */
 	public class Deck
 	{
-		private List<Card> deckOfCards = new List<Card>();
-        public List<Card> Cards { get => deckOfCards; set => deckOfCards = value; }
-
-        public Deck(List<Card> cards)
-        {
-            Cards = cards;
-        }
+        public List<Card> Cards { get; set; } = new List<Card>();
 
         public Deck()
 		{
@@ -44,7 +38,7 @@ namespace UnoGame
 					}
 					else
 					{
-						// two 1s, two 2s, two 3s..and 9s
+						// two 1s, two 2s, two 3s..and two 9s
 						Cards.Add(new Card(number, color));
 						Cards.Add(new Card(number, color));
 					}
@@ -67,56 +61,47 @@ namespace UnoGame
 				Cards.Add(new Card(12, color, Card.ActionType.DRAW_2));
 			}
 
-			// W=Wilds(4), 
-			Cards.Add(new Card(13, Card.Color.NONE, Card.ActionType.WILD));
-			Cards.Add(new Card(13, Card.Color.NONE, Card.ActionType.WILD));
-			Cards.Add(new Card(13, Card.Color.NONE, Card.ActionType.WILD));
-			Cards.Add(new Card(13, Card.Color.NONE, Card.ActionType.WILD));
-
-			// X-Draw 4 Wilds(4)
-			Cards.Add(new Card(14, Card.Color.NONE, Card.ActionType.WILD_DRAW_4));
-			Cards.Add(new Card(14, Card.Color.NONE, Card.ActionType.WILD_DRAW_4));
-			Cards.Add(new Card(14, Card.Color.NONE, Card.ActionType.WILD_DRAW_4));
-			Cards.Add(new Card(14, Card.Color.NONE, Card.ActionType.WILD_DRAW_4));
+            // W=Wilds(4) and X-Draw 4 Wilds(4)
+            for (int idx = 0; idx < 4; idx++)
+			{
+                Cards.Add(new Card(13, Card.Color.NONE, Card.ActionType.WILD));
+                Cards.Add(new Card(14, Card.Color.NONE, Card.ActionType.WILD_DRAW_4));
+            }
 
 			// randomize cards
 			var rnd = new Random();
-			Cards = deckOfCards.OrderBy(item => rnd.Next()).ToList();
-		}
-
-		// for testing only
-		public Card GetCardFromDeck()
-		{
-			try
+			Cards = Cards.OrderBy(item => rnd.Next()).ToList();
+			if (Cards.Count != 108)
 			{
-				return GetCardsFromDeck(1).First();
-			}
-			catch (ArgumentException)
-			{
-				// need to reset cards
-				return null;
+				throw new Exception("Deck should have 108 cards");
 			}
 		}
-		
-        public List<Card> GetCardsFromDeck(int numberOfCards)
-		{
-			if (numberOfCards <= 0)
-			{
-				return new List<Card>();
-			}
 
+        public List<Card> GetCardsFromDeck(int count)
+		{
 			var cardList = new List<Card>();
+			if (count <= 0)
+			{
+				return cardList;
+			}
+
 			IEnumerable<Card> cardsNotDealt = Cards.Where(c => c.Dealt == false);
             if (cardsNotDealt.Any())
             {
-                cardList = cardsNotDealt.Take(numberOfCards).ToList();
+                cardList = cardsNotDealt.Take(count).ToList();
                 foreach (Card card in cardList)
                 {
-                    card.Dealt = true;
+					// find card in Cards and set dealt to true
+					int cardIndex = Cards.IndexOf(card);
+					if (cardIndex < 0)
+					{
+						throw new Exception("Card not found in deck");
+					}
+					Cards[cardIndex].Dealt = true;
                 }
 			}
 
-			if (cardList.Count == numberOfCards)
+			if (cardList.Count == count)
 			{
 				return cardList;
 			}

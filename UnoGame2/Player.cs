@@ -129,7 +129,6 @@ namespace UnoGame
                 }
             }
         }
-
         public Card.Color GetWildColor()
         {
             SortPlayerCardsbyValue();

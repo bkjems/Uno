@@ -14,9 +14,10 @@ namespace UnoGame2
 
         private int numberOfPlayers;
         private static int numberOfCards = 7;
-        private Deck shuffledDeck = new Deck(); // random order
-        private List<Player> players = new List<Player>();
-        private Card flippedCard = new Card();
+        private Deck shuffledDeck = new(); // random order
+        private List<Player> players = new();
+        private Card _flippedCard = new();
+        private List<Card> flippedCardCount = new();
         private Rotation rotation;
 
         public Game(int numberOfPlayers)
@@ -32,20 +33,22 @@ namespace UnoGame2
         }
 
         public Deck ShuffledDeck { get => shuffledDeck; set => shuffledDeck = value; }
-        public Card FlippedCard { get => flippedCard; set => flippedCard = value; }
+        public Card FlippedCard 
+        { 
+            get => _flippedCard; 
+            set
+            {
+                _flippedCard = value;
+                flippedCardCount.Insert(0, _flippedCard);
+            }
+        }
         public List<Player> Players { get => players; set => players = value; }
         public int NumberOfCards { get => numberOfCards; set => numberOfCards = value; }
         public int NumberOfPlayers { get => numberOfPlayers; set => numberOfPlayers = value; }
 
         private Card GetCard()
         {
-            List<Card> cards = GetCards(1);
-            if (cards.Count > 0)
-            {
-                return cards[0];
-            }
-
-            return null;
+            return GetCards(1)[0];
         }
 
         public List<Card> GetCards(int numberOfCards)
@@ -64,6 +67,8 @@ namespace UnoGame2
         {
             ShuffledDeck = new Deck();
 
+            flippedCardCount.Clear();
+
             foreach (Player p in Players)
             {
                 foreach (Card playerCard in p.Cards)
@@ -79,9 +84,9 @@ namespace UnoGame2
                             number == playerCard.Number &&
                             action == playerCard.Action;
 
-                            bool rv2 = color == flippedCard.GetCardColor() &&
-                            number == flippedCard.Number &&
-                            action == flippedCard.Action;
+                            bool rv2 = color == FlippedCard.GetCardColor() &&
+                            number == FlippedCard.Number &&
+                            action == FlippedCard.Action;
 
                             return rv || rv2;
                         }
@@ -140,9 +145,8 @@ namespace UnoGame2
         {
             var numberOfPlayers = Players.Count;
             var index = Players.IndexOf(currentPlayer);
-            Rotation rotation = this.rotation;
 
-            if (rotation == Rotation.RIGHT)
+            if (GetRotation() == Rotation.RIGHT)
             {
                 if (index + 1 >= numberOfPlayers)
                 {
@@ -170,19 +174,31 @@ namespace UnoGame2
             return nextPlayer;
         }
 
-        private Card GetStartCard()
+        public Card GetStartCard()
         {
             /* If the top card is a Wild or Wild Draw 4, return it to the 
              * deck and pick another card. */
             Card card = GetCard();
+            List<Card> wildCards = new List<Card>();
 
             while (card.Action == Card.ActionType.WILD || card.Action == Card.ActionType.WILD_DRAW_4)
             {
-                card.Dealt = false;
+                wildCards.Add(card);
                 card = GetCard();
             }
 
+            // return wild cards to the deck
+            foreach (Card wildCard in wildCards)
+            {
+                wildCard.Dealt = false;
+                ShuffledDeck.Cards.Add(wildCard);
+            }
+            
             FlippedCard = card;
+            if (FlippedCard.Dealt == false)
+            {
+                Console.WriteLine("FlippedCard.Dealt is false");
+            }
 
             if (card.Action == Card.ActionType.REVERSE)
             {
@@ -192,25 +208,11 @@ namespace UnoGame2
             return card;
         }
 
-        private Player GetStartPlayer()
-        {
-            // person that draws highest card goes first
-            int maxNum = 0;
-            Player startPlayer = null;
-
-            foreach (Player p in Players)
-            {
-                Card c = GetCard();
-                if (c.Number > maxNum)
-                {
-                    maxNum = c.Number;
-                    startPlayer = p;
-                }
-            }
-
-            Console.WriteLine("Starting Player: " + startPlayer.Name);
-            return startPlayer;
-        }
+        /* The player that draws the highest card goes first. 
+         * If the player draws a Wild or Wild Draw 4, return it to the deck
+         * and pick another card. 
+         * Afterward, return those cards to the deck, reshuffle, 
+         * and deal the hands. */
 
         private bool HasPlayerWon()
         {
@@ -226,8 +228,13 @@ namespace UnoGame2
             return false;
         }
 
-        public void PrintCards(List<Card> drawCards)
+        public void PrintCards(List<Card> drawCards, String label="")
         {
+            if (label != "")
+            {
+                Console.Write(label);
+            }
+
             if (drawCards == null)
             {
                 return;
@@ -260,14 +267,14 @@ namespace UnoGame2
                         currentPlayer = GetNextPlayer(currentPlayer);
                         drawCards = ShuffledDeck.GetCardsFromDeck(2);
                         currentPlayer.Cards.AddRange(drawCards);
-                        PrintCards(drawCards);
+                        PrintCards(drawCards, " draw 2: ");
                         break;
                     case Card.ActionType.WILD_DRAW_4:
                         flippedCard.SetCardColor(currentPlayer.GetWildColor());
                         currentPlayer = GetNextPlayer(currentPlayer);
                         drawCards = ShuffledDeck.GetCardsFromDeck(4);
                         currentPlayer.Cards.AddRange(drawCards);
-                        PrintCards(drawCards);
+                        PrintCards(drawCards, " draw 4: ");
                         break;
                     case Card.ActionType.WILD:
                         flippedCard.SetCardColor(currentPlayer.GetWildColor());
@@ -293,13 +300,17 @@ namespace UnoGame2
 
         public Player PlaysCard(Player currentPlayer)
         {
-            Card cardPlayed = currentPlayer.TryPlayCard(flippedCard);
+            Card cardPlayed = currentPlayer.TryPlayCard(_flippedCard);
 
             if (cardPlayed == null)
             {
-                return HandleFailedCardPlay(currentPlayer);
+                return HandleNoCardPlayed(currentPlayer);
             }
 
+            /*if (cardPlayed.Dealt == false)
+            {
+                throw new Exception("Card played is not dealt: " + cardPlayed.PrintCard());
+            }*/
             FlippedCard = cardPlayed;
             currentPlayer.PrintRemoveCard(cardPlayed);
 
@@ -308,7 +319,7 @@ namespace UnoGame2
             return currentPlayer;
         }
 
-        private Player HandleFailedCardPlay(Player currentPlayer)
+        private Player HandleNoCardPlayed(Player currentPlayer)
         {
             Card cardPlayed = GetCard();
             currentPlayer.Cards.Add(cardPlayed);
@@ -316,11 +327,11 @@ namespace UnoGame2
 
             if (cardPlayed.IsMatchOrWild(FlippedCard))
             {
-                cardPlayed = currentPlayer.TryPlayCard(flippedCard);
+                cardPlayed = currentPlayer.TryPlayCard(_flippedCard);
                 if (cardPlayed.Action == Card.ActionType.WILD ||
                     cardPlayed.Action == Card.ActionType.WILD_DRAW_4)
                 {
-                    flippedCard.SetCardColor(currentPlayer.GetWildColor());
+                    _flippedCard.SetCardColor(currentPlayer.GetWildColor());
                 }
             }
             else
@@ -336,6 +347,50 @@ namespace UnoGame2
             return currentPlayer;
         }
 
+        public bool ValidateCardCount()
+        {
+            int totalCards = 0;
+            int totalPlayerCards = 0;
+            int totalUnDealtCards = 0;
+            int totalDealtCards = 0;
+            foreach (Player player in Players)
+            {
+                // count all dealt cards
+                foreach (Card playerCard in player.Cards)
+                {
+                    if (playerCard.Dealt == false)
+                    {
+                        throw new Exception("Dealt is false: " + playerCard.PrintCard());
+                    }
+                }
+                totalPlayerCards += player.Cards.Count;
+            }
+
+            // count all dealt = false in shuffled deck
+            foreach (Card card in ShuffledDeck.Cards)
+            {
+                if (card.Dealt == false)
+                {
+                    totalUnDealtCards++;
+                }
+                else
+                {
+                    totalDealtCards++;
+                }
+            }
+
+            var totalFlippedCards = flippedCardCount.Count;
+            totalCards = totalPlayerCards + totalUnDealtCards + totalFlippedCards;
+            
+            if (totalCards != 108)
+            {
+                Console.WriteLine(totalCards+" = "+totalPlayerCards+ "+" + totalUnDealtCards + "+" + totalFlippedCards);
+                throw new Exception("Card count is off: "+ totalCards);
+            }
+
+            return true;
+        }
+
         public void StartGame()
         {
             PrintPlayers();
@@ -344,7 +399,8 @@ namespace UnoGame2
             Card card = GetStartCard();
             Console.WriteLine("Flipped Card : {0}", card.PrintCard(false));
 
-            Player currentPlayer = GetStartPlayer();
+            //Player currentPlayer = GetStartPlayer();
+            Player currentPlayer = Players[0];
             currentPlayer.PrintCard();
 
             // if top card is Draw2 first player must draw 2 cards
@@ -358,6 +414,11 @@ namespace UnoGame2
 
             while (true)
             {
+                if (!ValidateCardCount())
+                {
+                    break;
+                }
+
                 if (HasPlayerWon())
                 {
                     break;

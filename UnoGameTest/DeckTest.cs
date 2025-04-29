@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UnoGame;
 using UnoGame2;
@@ -51,7 +52,7 @@ namespace UnoGameTest
             c.Dealt = true;
             var c2 = new Card(7, Card.Color.BLACK, Card.ActionType.NONE);
             c2.Dealt = true;
-
+ 
             List<Card> cards = new List<Card>
             {
                 c,
@@ -93,6 +94,84 @@ namespace UnoGameTest
             //g.ShuffledDeck = d;
             //List<Card> cardList = d.GetCards(3);
             //Assert.AreEqual(0, cardList.Count);
+        }
+    
+        [TestMethod]
+        public void GetCardsFromDeck_ValidNumberOfCards_ReturnsCorrectCount()
+        {
+            // Arrange
+            Deck deck = new Deck();
+            int numberOfCards = 5;
+
+            // Act
+            List<Card> cards = deck.GetCardsFromDeck(numberOfCards);
+
+            // Assert
+            Assert.IsNotNull(cards);
+            Assert.AreEqual(numberOfCards, cards.Count);
+            Assert.IsTrue(cards.All(c => c.Dealt));
+        }
+
+        [TestMethod]
+        public void GetCardsFromDeck_ZeroCardsRequested_ReturnsEmptyList()
+        {
+            // Arrange
+            Deck deck = new Deck();
+
+            // Act
+            List<Card> cards = deck.GetCardsFromDeck(0);
+
+            // Assert
+            Assert.IsNotNull(cards);
+            Assert.AreEqual(0, cards.Count);
+        }
+
+        [TestMethod]
+        public void GetCardsFromDeck_NegativeNumberOfCards_ReturnsEmptyList()
+        {
+            // Arrange
+            Deck deck = new Deck();
+
+            // Act
+            List<Card> cards = deck.GetCardsFromDeck(-5);
+
+            // Assert
+            Assert.IsNotNull(cards);
+            Assert.AreEqual(0, cards.Count);
+        }
+
+        [TestMethod]
+        public void GetCardsFromDeck_NotEnoughCardsAvailable_ReturnsNull()
+        {
+            // Arrange
+            Deck deck = new Deck();
+            foreach (var card in deck.Cards)
+            {
+                card.Dealt = true; // Mark all cards as dealt
+            }
+
+            // Act
+            List<Card> cards = deck.GetCardsFromDeck(5);
+
+            // Assert
+            Assert.IsNull(cards);
+        }
+
+        [TestMethod]
+        public void GetCardsFromDeck_PartialCardsAvailable_ReturnsAvailableCards()
+        {
+            // Arrange
+            Deck deck = new Deck();
+            deck.Cards[0].Dealt = true; // Mark the first card as dealt
+            int numberOfCards = 3;
+
+            // Act
+            List<Card> cards = deck.GetCardsFromDeck(numberOfCards);
+
+            // Assert
+            Assert.IsNotNull(cards);
+            Assert.AreEqual(numberOfCards, cards.Count);
+            Assert.IsTrue(cards.All(c => c.Dealt));
         }
     }
 }

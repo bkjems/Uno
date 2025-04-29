@@ -32,7 +32,6 @@ namespace UnoGame
             Dealt = false;
             
         }
-
         public Card(int num, Color color=Color.NONE, ActionType special = ActionType.NONE)
         {
             Number = num;
@@ -40,7 +39,6 @@ namespace UnoGame
             Action = special;
             Dealt = false;
         }
-
         public int Number { get => number; set => number = value; }
         public ActionType Action { get => action; set => action = value; }
         public bool Dealt { get => dealt; set => dealt = value; }
@@ -49,7 +47,6 @@ namespace UnoGame
         {
             return this.color;
         }
-
         public void SetCardColor(Card.Color color)
         {
             this.color = color;
@@ -60,12 +57,10 @@ namespace UnoGame
         {
             return (GetCardColor() == cardColor);
         }
-
         public bool IsNumberMatch(int cardNumber)
         {
             return (Number == cardNumber);
         }
-
         public bool IsMatchOrWild(Card flippedCard)
         {
             return (IsColorMatch(flippedCard.GetCardColor()) ||
@@ -73,7 +68,6 @@ namespace UnoGame
                    Action == Card.ActionType.WILD ||
                    Action == Card.ActionType.WILD_DRAW_4);
         }
-
         public string PrintCard(bool print = false, string player = "")
         {
             var cardText = "";
